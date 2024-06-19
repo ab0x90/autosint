@@ -68,15 +68,6 @@ sudo apt install python3-pip
 echo "${Green}[+]${NC} Installing GAU"
 go install github.com/lc/gau/v2/cmd/gau@latest
 
-# Install crosslinked
-echo "${Green}[+]${NC} Installing Crosslinked"
-pip3 install crosslinked
-
-# Install pip3 and aiodnsbrute and seclists
-echo "${Green}[+]${NC} Installing pip3, aiodnsbrute and seclists"
-sudo apt install python3-pip seclists
-pip3 install aiodnsbrute
-
 # Install pipx and bbot
 echo "${Green}[+]${NC} Installing pipx and BBOT"
 sudo apt install pipx
@@ -95,15 +86,28 @@ reload_shell() {
             ;;
     esac
 }
+pipx install bbot
 reload_shell
 
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt update
+sudo apt install -y python3.11 python3.11-venv
+mkdir setupvenv
+cd setupvenv
+python3.11 -m venv .
+source bin/activate
 
-for i in {1..50}
-do
-    echo "-"
-done
+
+# Install crosslinked
+echo "${Green}[+]${NC} Installing Crosslinked"
+pip3 install crosslinked
+
+# Install pip3 and aiodnsbrute and seclists
+echo "${Green}[+]${NC} Installing pip3, aiodnsbrute and seclists"
+sudo apt install python3-pip seclists
+pip3 install aiodnsbrute
+
+echo "--------------------------------------------------------------------------------------------------"
+
 echo "${Green}[+]${NC} Setup complete, necessary tools have been added and setup. Remember to add bbot config file at: ~/.config/bbot/secrets.yml"
-for i in {1..50}
-do
-    echo "-"
-done
+echo "--------------------------------------------------------------------------------------------------"
