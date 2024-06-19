@@ -81,7 +81,21 @@ pip3 install aiodnsbrute
 echo "${Green}[+]${NC} Installing pipx and BBOT"
 sudo apt install pipx
 pipx ensure path
-$SHELL
+reload_shell() {
+    local shell_name=$(basename "$SHELL")
+    case "$shell_name" in
+        bash)
+            source ~/.profile
+            ;;
+        zsh)
+            source ~/.zshrc
+            ;;
+        *)
+            echo -e "${YELLOW}Unknown shell. Please restart your shell manually to apply changes.${NC}"
+            ;;
+    esac
+}
+reload_shell
 
 
 for i in {1..50}
